@@ -1,0 +1,48 @@
+﻿@model CourseVm
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 shadow bg-white rounded" style="min-height: 400px; overflow-y: auto;">
+            @if (TempData["NameCourse"] != null)
+            {
+                <h1 class="border-bottom custom-border-bottom">Khóa học: @TempData["NameCourse"]</h1>
+            }
+            else
+            {
+                <h1 class="border-bottom custom-border-bottom">Tất cả khóa học</h1>
+            }
+            <ul id="monhoc-list" class="list-unstyled">
+                <div class="row">
+                @for (int i = 0; i < Model.Subjects.Count; i++)
+                {
+                        <div class="col-6 @((i % 2 == 0) ? "left-column" : "")">
+                    <li>@((i+1)+". " + Model.Subjects[i].TenMonHoc)</li>
+                    </div>
+                }
+                </div>
+            </ul>
+        </div>
+        <div class="col-3 ms-auto shadow bg-white rounded">
+                <h1 class="border-bottom custom-border-bottom">Khóa học</h1>
+                    <form asp-action="Index" asp-controller="Home" method="get">
+                        <ul id="khoahoc-list">
+                            @foreach (var item in Model.Courses)
+                            { <li>
+                                    <button class="btn btn-link" type="submit" name="id" value="@item.Id">@item.TenKhoaHoc</button>
+                            </li>
+                            }
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
